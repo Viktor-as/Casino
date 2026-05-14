@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="lt"
       suppressHydrationWarning
       className={`${secondaryFont.variable} ${primaryFont.variable} h-full antialiased`}
     >
