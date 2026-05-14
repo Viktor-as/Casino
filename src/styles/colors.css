@@ -6,14 +6,49 @@
 
   --color-grey: #a7a7a7;
 
-  --color-text-primary: #29350a;
-  --color-text-secondary: #fff;
-  --color-text-tertiary: #cbd9d9;
-
   --color-button-primary: #2c6a4f;
   --color-button-primary-hover: #41916c;
   --color-button-primary-text: #fff;
 
   --color-border-primary: #cbd9d9;
   --color-border-secondary: #081c14;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --primary: #008000;
+  --secondary: #7832d9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #008000;
+  --text-tertiary: #7832d9;
+  --text-grey: #475569;
+}
+
+.dark {
+  --background: #070f22;
+  --foreground: #ededed;
+
+  --primary: #2ff801;
+  --secondary: #d6baff;
+
+  --text-primary: #ffffff;
+  --text-secondary: #2ff801;
+  --text-tertiary: #d6baff;
+  --text-grey: #cdc2d7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-grey: var(--text-grey);
 }

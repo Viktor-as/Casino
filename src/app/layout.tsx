@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "@/styles/globals.css";
 import Header from "@/components/Header/Header";
 
-const secondaryFont = Geist({
+const secondaryFont = Inter({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-secondaryFont",
 });
 
-const primaryFont = Geist_Mono({
+const primaryFont = Montserrat({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-primaryFont",
@@ -33,11 +33,7 @@ export default function RootLayout({
       className={`${secondaryFont.variable} ${primaryFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           {children}
         </ThemeProvider>

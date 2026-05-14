@@ -1,9 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import ThemeSwitcher from "./ThemeSwitcher";
+
+import logo from "@/assets/logo/ggcasino-logo.png";
 
 const navItems = [
   { href: "/", label: "Pradžia" },
-  { href: "/bets", label: "Statymai" },
+  { href: "/bets", label: "Lažybos" },
   { href: "/my-bets", label: "Mano statymai" },
   { href: "/wallet", label: "Piniginė" },
   { href: "/login", label: "Prisijungti" },
@@ -13,14 +16,12 @@ const navItems = [
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-background/80 backdrop-blur-md dark:border-zinc-800/80">
-      <div className="content flex flex-wrap items-center justify-between gap-4 py-3">
-        <Link
-          href="/"
-          className="font-secondary text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-red-800 dark:hover:text-red-200"
-        >
-          Casino
+      <div className="content relative flex items-center justify-between gap-4 py-4">
+        <Link href="/" className="absolute left-10 top-2">
+          <Image src={logo} alt="GG Casino Logo" width={120} />
         </Link>
-        <nav aria-label="Pagrindinė navigacija" className="order-3 w-full min-[480px]:order-none min-[480px]:mx-auto min-[480px]:w-auto min-[480px]:flex-1 min-[768px]:flex-none">
+        <div className="w-[120px]"></div>
+        <nav aria-label="Pagrindinė navigacija" className="">
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {navItems.map(({ href, label }) => (
               <li key={href}>
