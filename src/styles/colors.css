@@ -1,0 +1,19 @@
+@theme {
+  --color-bg-primary: #d8ded3;
+  --color-bg-secondary: #f8f9fb;
+  --color-bg-footer: #081c14;
+  --color-bg-top-banner: #081c14;
+
+  --color-grey: #a7a7a7;
+
+  --color-text-primary: #29350a;
+  --color-text-secondary: #fff;
+  --color-text-tertiary: #cbd9d9;
+
+  --color-button-primary: #2c6a4f;
+  --color-button-primary-hover: #41916c;
+  --color-button-primary-text: #fff;
+
+  --color-border-primary: #cbd9d9;
+  --color-border-secondary: #081c14;
+}
