@@ -3,6 +3,7 @@ import { Montserrat, Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "@/styles/globals.css";
 import Header from "@/components/Header/Header";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 
 const secondaryFont = Inter({
   weight: ["400", "500", "600", "700"],
@@ -34,8 +35,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          {children}
+          <QueryProvider>
+            <Header />
+            {children}
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

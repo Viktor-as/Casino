@@ -1,11 +1,13 @@
 "use client";
 
 import { ButtonPrimary } from "@/components/Buttons/ButtonPrimary";
-import { useForm, useStore } from "@tanstack/react-form";
-import z from "zod";
-
 import { PasswordInput } from "@/components/Form/PasswordInput";
+import { useRegister } from "@/hooks/auth/useRegister";
 import { getFieldDisplayState } from "@/helpers/formHelpers";
+import type { RegisterPayload } from "@/lib/api/auth/types";
+import { useForm, useStore } from "@tanstack/react-form";
+import { useRouter } from "next/navigation";
+import z from "zod";
 
 const passwordSchema = z
   .string()
@@ -32,7 +34,21 @@ const registrationFormSchema = z
     path: ["confirmPassword"],
   });
 
+type RegistrationFormValues = z.infer<typeof registrationFormSchema>;
+
+function toRegisterPayload(value: RegistrationFormValues): RegisterPayload {
+  return {
+    name: value.name,
+    email: value.email,
+    password: value.password,
+    confirmPassword: value.confirmPassword,
+  };
+}
+
 export default function RegistrationForm() {
+  const router = useRouter();
+  const register = useRegister();
+
   const form = useForm({
     defaultValues: {
       name: "",
@@ -42,8 +58,14 @@ export default function RegistrationForm() {
       terms: false,
     },
     onSubmit: async ({ value }) => {
-      // Do something with form data
-      console.log("sending data:", value);
+      register.reset();
+
+      try {
+        await register.mutateAsync(toRegisterPayload(value));
+        router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
     },
     validators: {
       onSubmit: registrationFormSchema,
@@ -54,7 +76,10 @@ export default function RegistrationForm() {
 
   const { Field } = form;
   const submissionAttempts = useStore(form.store, (state) => state.submissionAttempts);
-  // const isSubmitting = useStore(form.store, (state) => state.isSubmitting); // default built in state
+
+  const serverErrorMessage = register.isError
+    ? register.error.message || "Registracija nepavyko. Bandykite dar kartą."
+    : undefined;
 
   return (
     <div className="content center h-[calc(100vh-100px)]">
@@ -205,7 +230,14 @@ export default function RegistrationForm() {
               );
             }}
           </Field>
-          <ButtonPrimary type="submit">Registruotis</ButtonPrimary>
+          {serverErrorMessage && (
+            <p className="text-[0.875rem] text-red-500" role="alert">
+              {serverErrorMessage}
+            </p>
+          )}
+          <ButtonPrimary type="submit" isLoading={register.isPending} disabled={register.isPending}>
+            Registruotis
+          </ButtonPrimary>
         </form>
       </div>
     </div>
