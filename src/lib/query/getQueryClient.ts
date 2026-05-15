@@ -3,7 +3,7 @@ import { QueryClient, environmentManager } from "@tanstack/react-query";
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
-      queries: { staleTime: 60_000 },
+      queries: { staleTime: 300_000, gcTime: 300_000 },
       mutations: { retry: false },
     },
   });

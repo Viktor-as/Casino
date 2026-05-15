@@ -1,12 +1,19 @@
 import Image from "next/image";
 import { ButtonPrimaryLink } from "@/components/Buttons/ButtonPrimary";
 import heroImage from "@/assets/images/hero.jpg";
-import PulsingLoader from "../Loaders/PulsingLoader";
+import PulsingLoader from "@/components/Loaders/PulsingLoader";
 
 function HeroSection() {
   return (
     <section className="relative flex min-h-[700px] items-center">
-      <Image src={heroImage} alt="Kazino" fill priority className="object-cover object-center" />
+      <Image
+        src={heroImage}
+        alt="Kazino"
+        fill
+        priority
+        className="object-cover object-center"
+        sizes="(max-width: 767px) 100vw, 1920px"
+      />
       <div className="absolute inset-0 bg-linear-to-r from-background/90 via-background/50 to-transparent" />
       <div className="content relative z-10 flex flex-col items-start gap-6 py-16 md:py-24">
         <div className="flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/20 px-3 py-1 backdrop-blur-sm">
