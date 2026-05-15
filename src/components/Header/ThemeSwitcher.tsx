@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
-function ThemeSwitcher() {
+interface ThemeSwitcherProps {
+  onThemeChange?: () => void;
+}
+
+function ThemeSwitcher({ onThemeChange }: ThemeSwitcherProps) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
@@ -29,7 +33,10 @@ function ThemeSwitcher() {
       <input
         type="checkbox"
         checked={resolvedTheme === "light"}
-        onChange={(e) => setTheme(e.target.checked ? "light" : "dark")}
+        onChange={(e) => {
+          setTheme(e.target.checked ? "light" : "dark");
+          onThemeChange?.();
+        }}
         suppressHydrationWarning
       />
       <span className="slider"></span>

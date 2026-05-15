@@ -4,7 +4,15 @@ import { ButtonPrimary, ButtonPrimaryLink } from "@/components/Buttons/ButtonPri
 import { useLogout } from "@/hooks/auth/useLogout";
 import { useSession } from "@/hooks/auth/useSession";
 
-export default function HeaderAuthActions() {
+interface HeaderAuthActionsProps {
+  showLoginLink?: boolean;
+  onLogoutClick?: () => void;
+}
+
+export default function HeaderAuthActions({
+  showLoginLink = true,
+  onLogoutClick,
+}: Readonly<HeaderAuthActionsProps>) {
   const { isAuthenticated } = useSession();
   const logout = useLogout();
 
@@ -12,13 +20,20 @@ export default function HeaderAuthActions() {
     return (
       <ButtonPrimary
         extraButtonCss="py-[5px] w-auto max-w-none"
-        onClick={() => logout.mutate()}
+        onClick={() => {
+          onLogoutClick?.();
+          logout.mutate();
+        }}
         isLoading={logout.isPending}
         disabled={logout.isPending}
       >
         Atsijungti
       </ButtonPrimary>
     );
+  }
+
+  if (!showLoginLink) {
+    return null;
   }
 
   return (

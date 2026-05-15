@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/assets/logo/ggcasino-logo.png";
-import { NAV_ITEMS } from "@/components/Header/Header";
+import { NAV_ITEMS } from "@/constants/nav";
 
 const INFO_LINKS = [
   { href: "#", label: "Taisyklės" },
