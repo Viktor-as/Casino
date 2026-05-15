@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import PulsingLoader from "@/components/Loaders/PulsingLoader";
 import { fetchEuroleagueEvents } from "@/lib/api/events/fetchOnClient";
 import { queryKeys } from "@/lib/query/queryKeys";
-import ChevronIcon from "@/assets/icons/chevron.svg";
 
 import EuroleagueMatchCard from "./euroleague/EuroleagueMatchCard";
 
@@ -21,51 +19,20 @@ function MatchCardSkeleton() {
 }
 
 function BetsSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const euroleague = useQuery({
     queryKey: queryKeys.events.euroleague,
     queryFn: fetchEuroleagueEvents,
   });
 
-  const title =
-    euroleague.data?.category ?? (euroleague.isPending ? "EuroLeague…" : "EuroLeague");
+  const title = euroleague.data?.category ?? (euroleague.isPending ? "EuroLeague…" : "EuroLeague");
   const description = euroleague.data?.description ?? "";
-
-  const scrollMatches = (direction: "left" | "right") => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const offset = direction === "left" ? -container.clientWidth : container.clientWidth;
-    container.scrollBy({ left: offset, behavior: "smooth" });
-  };
 
   return (
     <section className="bg-background py-16 max-mob:py-10">
       <div className="content flex flex-col gap-10">
-        <div className="flex items-end justify-between gap-4">
-          <div className="flex flex-col gap-2">
-            <h2 className="h2 text-foreground">{title}</h2>
-            {description ? (
-              <p className="text-base leading-6 text-text-grey">{description}</p>
-            ) : null}
-          </div>
-          <div className="flex shrink-0 gap-2">
-            <button
-              type="button"
-              aria-label="Ankstesnis"
-              onClick={() => scrollMatches("left")}
-              className="flex items-center justify-center rounded-lg bg-foreground/10 p-2 text-text-grey transition-colors hover:bg-foreground/15"
-            >
-              <ChevronIcon className="rotate-180" width={8} height={12} aria-hidden />
-            </button>
-            <button
-              type="button"
-              aria-label="Kitas"
-              onClick={() => scrollMatches("right")}
-              className="flex items-center justify-center rounded-lg bg-foreground/10 p-2 text-text-grey transition-colors hover:bg-foreground/15"
-            >
-              <ChevronIcon width={8} height={12} aria-hidden />
-            </button>
-          </div>
+        <div className="flex flex-col gap-2">
+          <h2 className="h2 text-foreground">{title}</h2>
+          {description ? <p className="text-base leading-6 text-text-grey">{description}</p> : null}
         </div>
 
         {euroleague.isPending ? (
@@ -77,10 +44,7 @@ function BetsSection() {
         ) : euroleague.isError ? (
           <p className="text-text-grey">Nepavyko įkelti Eurolygos rungtynių. Bandykite vėliau.</p>
         ) : (
-          <div
-            ref={scrollRef}
-            className="grid grid-cols-4 gap-6 max-tab:grid-cols-2 max-mob:grid-cols-1"
-          >
+          <div className="grid grid-cols-4 gap-6 max-tab:grid-cols-2 max-mob:grid-cols-1">
             {euroleague.data.matches.map((match, index) => (
               <div key={`${match.team1}-${match.team2}-${index}`}>
                 <EuroleagueMatchCard match={match} stakeFieldId={`${index}`} />
