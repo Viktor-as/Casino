@@ -6,29 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import PulsingLoader from "@/components/Loaders/PulsingLoader";
 import { fetchEuroleagueEvents } from "@/lib/api/events/fetchOnClient";
 import { queryKeys } from "@/lib/query/queryKeys";
+import ChevronIcon from "@/assets/icons/chevron.svg";
 
 import EuroleagueMatchCard from "./euroleague/EuroleagueMatchCard";
-
-function ChevronIcon({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg
-      width="8"
-      height="12"
-      viewBox="0 0 8 12"
-      fill="none"
-      aria-hidden
-      className={direction === "left" ? "rotate-180" : undefined}
-    >
-      <path
-        d="M1 1L6 6L1 11"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function MatchCardSkeleton() {
   return (
@@ -75,7 +55,7 @@ function BetsSection() {
               onClick={() => scrollMatches("left")}
               className="flex items-center justify-center rounded-lg bg-foreground/10 p-2 text-text-grey transition-colors hover:bg-foreground/15"
             >
-              <ChevronIcon direction="left" />
+              <ChevronIcon className="rotate-180" width={8} height={12} aria-hidden />
             </button>
             <button
               type="button"
@@ -83,7 +63,7 @@ function BetsSection() {
               onClick={() => scrollMatches("right")}
               className="flex items-center justify-center rounded-lg bg-foreground/10 p-2 text-text-grey transition-colors hover:bg-foreground/15"
             >
-              <ChevronIcon direction="right" />
+              <ChevronIcon width={8} height={12} aria-hidden />
             </button>
           </div>
         </div>
@@ -103,7 +83,7 @@ function BetsSection() {
           >
             {euroleague.data.matches.map((match, index) => (
               <div key={`${match.team1}-${match.team2}-${index}`}>
-                <EuroleagueMatchCard match={match} />
+                <EuroleagueMatchCard match={match} stakeFieldId={`${index}`} />
               </div>
             ))}
           </div>

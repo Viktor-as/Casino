@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import { ButtonPrimary } from "@/components/Buttons/ButtonPrimary";
 import type { EuroleagueMatch } from "@/lib/api/events/types";
 import { getTeamLogo } from "@/helpers/teamLogos";
 
+import BettingForm from "@/components/Form/BettingForm";
 import TeamBetCard from "./TeamBetCard";
 import WinProbabilityBar from "./WinProbabilityBar";
 
@@ -13,9 +13,10 @@ type SelectedTeam = "team1" | "team2" | null;
 
 type EuroleagueMatchCardProps = {
   match: EuroleagueMatch;
+  stakeFieldId: string;
 };
 
-function EuroleagueMatchCard({ match }: EuroleagueMatchCardProps) {
+function EuroleagueMatchCard({ match, stakeFieldId }: EuroleagueMatchCardProps) {
   const [selectedTeam, setSelectedTeam] = useState<SelectedTeam>(null);
 
   const team1Logo = getTeamLogo(match.team1);
@@ -48,20 +49,7 @@ function EuroleagueMatchCard({ match }: EuroleagueMatchCardProps) {
 
       <WinProbabilityBar team1WinRate={match.team1WinRate} team2WinRate={match.team2WinRate} />
 
-      <div className="flex flex-col gap-3 pt-2">
-        <input
-          type="text"
-          readOnly
-          disabled
-          tabIndex={-1}
-          placeholder="Statymo suma €"
-          aria-hidden
-          className="h-[46px] w-full rounded-lg border border-border-primary bg-background px-3 text-sm text-text-grey placeholder:text-text-grey/70"
-        />
-        <ButtonPrimary disabled extraButtonCss="max-w-none w-full">
-          Statyti
-        </ButtonPrimary>
-      </div>
+      <BettingForm selectedTeam={selectedTeam} stakeFieldId={stakeFieldId} />
     </article>
   );
 }

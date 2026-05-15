@@ -8,4 +8,7 @@ export const queryKeys = {
     euroleague: ["events", "euroleague"] as const,
     eurovision: ["events", "eurovision"] as const,
   },
+  betting: {
+    placeBet: ["betting", "placeBet"] as const,
+  },
 };

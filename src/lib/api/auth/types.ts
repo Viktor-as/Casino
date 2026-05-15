@@ -29,3 +29,18 @@ export type LoginPayload = {
 export type LoginResult =
   | { ok: true; data: PlayerAuthResponse }
   | { ok: false; message: string };
+
+export type PlaceBetPayload = {
+  amount: number;
+};
+
+export type PlaceBetSuccessResponse = {
+  transactionId: string;
+  currency: string;
+  balance: number;
+  winAmount: number | null;
+};
+
+export type PlaceBetResult =
+  | { ok: true; data: PlaceBetSuccessResponse }
+  | { ok: false; message: string; sessionExpired?: boolean };

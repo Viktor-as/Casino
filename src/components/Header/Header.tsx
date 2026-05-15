@@ -13,7 +13,6 @@ export const NAV_ITEMS = [
   { href: "/lazybos", label: "Lažybos" },
   { href: "/mano-statymai", label: "Mano statymai" },
   { href: "/pinigine", label: "Piniginė" },
-  { href: "/registracija", label: "Registracija" },
 ] as const;
 
 function Header() {
