@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "./colors.css";
 @import "./reset.css";
-@import "./components/themeSwitcher.css";
+@import "./components/theme-switcher.css";
+@import "./components/form-fields.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -39,7 +40,7 @@ body {
   font-family: var(--font-primaryFont), sans-serif;
 }
 
-h1 {
+.h1 {
   font-size: 3.6rem;
   font-weight: 700;
   line-height: 120%;

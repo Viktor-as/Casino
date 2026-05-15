@@ -1,17 +1,5 @@
 @theme {
   --color-bg-primary: #d8ded3;
-  --color-bg-secondary: #f8f9fb;
-  --color-bg-footer: #081c14;
-  --color-bg-top-banner: #081c14;
-
-  --color-grey: #a7a7a7;
-
-  --color-button-primary: #2c6a4f;
-  --color-button-primary-hover: #41916c;
-  --color-button-primary-text: #fff;
-
-  --color-border-primary: #cbd9d9;
-  --color-border-secondary: #081c14;
 }
 
 :root {
@@ -20,11 +8,18 @@
 
   --primary: #008000;
   --secondary: #7832d9;
+  --grey: #475569;
 
   --text-primary: #0f172a;
   --text-secondary: #008000;
   --text-tertiary: #7832d9;
   --text-grey: #475569;
+
+  --button-text-primary: #ffffff;
+  --button-bg-primary: #008000;
+  --button-bg-primary-hover: #41916c;
+
+  --border-primary: #7d7d7d;
 }
 
 .dark {
@@ -33,11 +28,18 @@
 
   --primary: #2ff801;
   --secondary: #d6baff;
+  --grey: #cdc2d7;
 
   --text-primary: #ffffff;
   --text-secondary: #2ff801;
   --text-tertiary: #d6baff;
   --text-grey: #cdc2d7;
+
+  --button-text-primary: #070f22;
+  --button-bg-primary: #2ff801;
+  --button-bg-primary-hover: #23c201;
+
+  --border-primary: #475569;
 }
 
 @theme inline {
@@ -46,9 +48,16 @@
 
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-grey: var(--grey);
 
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   --color-text-grey: var(--text-grey);
+
+  --color-button-text-primary: var(--button-text-primary);
+  --color-button-bg-primary: var(--button-bg-primary);
+  --color-button-bg-primary-hover: var(--button-bg-primary-hover);
+
+  --color-border-primary: var(--border-primary);
 }
