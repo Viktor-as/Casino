@@ -58,3 +58,17 @@ body {
   line-height: 120%;
   font-family: var(--font-secondaryFont), sans-serif;
 }
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 var(--primary);
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px #69ffa800;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s infinite ease-in-out;
+}

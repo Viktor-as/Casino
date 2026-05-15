@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Spinner from "@/components/Spinners/Spinner";
+import Spinner from "@/components/Loaders/Spinner";
 import { cn } from "@/helpers/classNameHelpers";
 
 interface ButtonPrimaryProps {
