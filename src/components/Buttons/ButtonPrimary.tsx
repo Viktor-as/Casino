@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Spinner from "@/components/Spinners/Spinner";
+import { cn } from "@/helpers/classNameHelpers";
 
 interface ButtonPrimaryProps {
   children: React.ReactNode;
@@ -8,10 +9,12 @@ interface ButtonPrimaryProps {
   disabled?: boolean;
   isLoading?: boolean;
   type?: "button" | "submit" | "reset";
+  extraButtonCss?: string;
+  extraTextCss?: string;
 }
 
 const baseClasses = `rounded-[0.625rem] bg-button-bg-primary hover:bg-button-bg-primary-hover px-[15px]
-py-[5px] w-full max-w-[370px] flex items-center gap-[5px]
+py-[10px] w-full max-w-[370px] flex items-center gap-[5px]
 justify-center transition-colors duration-300 ease-in-out
 `;
 const stateClasses = (disabled?: boolean) =>
@@ -25,15 +28,17 @@ export const ButtonPrimary = ({
   disabled,
   isLoading,
   type = "button",
+  extraButtonCss,
+  extraTextCss,
 }: ButtonPrimaryProps) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${baseClasses} ${stateClasses(disabled)}`}
+      className={cn(baseClasses, stateClasses(disabled), extraButtonCss)}
       type={type}
     >
-      <span className={textClasses}>{isLoading ? <Spinner /> : children}</span>
+      <span className={cn(textClasses, extraTextCss)}>{isLoading ? <Spinner /> : children}</span>
     </button>
   );
 };
@@ -45,6 +50,8 @@ interface ButtonPrimaryLinkProps {
   isLoading?: boolean;
   href: string;
   type?: "button" | "submit" | "reset";
+  extraButtonCss?: string;
+  extraTextCss?: string;
 }
 
 export const ButtonPrimaryLink = ({
@@ -54,16 +61,18 @@ export const ButtonPrimaryLink = ({
   isLoading,
   href,
   type = "button",
+  extraButtonCss,
+  extraTextCss,
 }: ButtonPrimaryLinkProps) => {
   return (
     <Link href={href}>
       <button
         onClick={onClick}
         disabled={disabled}
-        className={`${baseClasses} ${stateClasses(disabled)}`}
+        className={cn(baseClasses, stateClasses(disabled), extraButtonCss)}
         type={type}
       >
-        <span className={textClasses}>{isLoading ? <Spinner /> : children}</span>
+        <span className={cn(textClasses, extraTextCss)}>{isLoading ? <Spinner /> : children}</span>
       </button>
     </Link>
   );

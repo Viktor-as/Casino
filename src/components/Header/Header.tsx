@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitcher from "./ThemeSwitcher";
 import HeaderNavLinks from "./HeaderNavLinks";
+import HeaderAuthActions from "./HeaderAuthActions";
+import HeaderBalance from "./HeaderBalance";
 
 import logo from "@/assets/logo/ggcasino-logo.png";
-import WalletIcon from "@/assets/icons/wallet.svg";
 import GlobeIcon from "@/assets/icons/globe.svg";
-import { ButtonPrimaryLink } from "../Buttons/ButtonPrimary";
 
 export const NAV_ITEMS = [
   { href: "/", label: "Pradžia" },
@@ -27,13 +27,7 @@ function Header() {
         <HeaderNavLinks navLinks={NAV_ITEMS} />
 
         <div className="flex items-center gap-3">
-          <div
-            className="flex items-center gap-2 rounded-[0.625rem] border border-primary/40 bg-background/50 px-2 py-1 font-bold text-text-secondary"
-            aria-label="Balansas"
-          >
-            <WalletIcon className="shrink-0 text-text-secondary" width={20} height={20} />
-            <span>250,00 €</span>
-          </div>
+          <HeaderBalance />
 
           <div
             className="flex items-center gap-2 rounded-[0.625rem] bg-foreground/10 px-2 py-1 font-medium dark:bg-white/10 border border-grey/40"
@@ -46,9 +40,7 @@ function Header() {
           </div>
 
           <ThemeSwitcher />
-          <ButtonPrimaryLink href="/prisijungti">
-            <span>Prisijungti</span>
-          </ButtonPrimaryLink>
+          <HeaderAuthActions />
         </div>
       </div>
     </header>

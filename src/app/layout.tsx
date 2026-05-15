@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import "@/styles/globals.css";
 import Header from "@/components/Header/Header";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { getSession } from "@/actions/auth/session";
+import { getQueryClient } from "@/lib/query/getQueryClient";
+import { queryKeys } from "@/lib/query/queryKeys";
 
 const secondaryFont = Inter({
   weight: ["400", "500", "600", "700"],
@@ -22,11 +26,18 @@ export const metadata: Metadata = {
   description: "Casino Website",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: queryKeys.auth.session,
+    queryFn: getSession,
+  });
+
   return (
     <html
       lang="lt"
@@ -34,12 +45,14 @@ export default function RootLayout({
       className={`${secondaryFont.variable} ${primaryFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <QueryProvider>
-            <Header />
-            {children}
-          </QueryProvider>
-        </ThemeProvider>
+        <QueryProvider>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Header />
+              {children}
+            </ThemeProvider>
+          </HydrationBoundary>
+        </QueryProvider>
       </body>
     </html>
   );

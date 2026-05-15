@@ -1,0 +1,29 @@
+"use client";
+
+import { ButtonPrimary, ButtonPrimaryLink } from "@/components/Buttons/ButtonPrimary";
+import { useLogout } from "@/hooks/auth/useLogout";
+import { useSession } from "@/hooks/auth/useSession";
+
+export default function HeaderAuthActions() {
+  const { isAuthenticated } = useSession();
+  const logout = useLogout();
+
+  if (isAuthenticated) {
+    return (
+      <ButtonPrimary
+        extraButtonCss="py-[5px] w-auto max-w-none"
+        onClick={() => logout.mutate()}
+        isLoading={logout.isPending}
+        disabled={logout.isPending}
+      >
+        Atsijungti
+      </ButtonPrimary>
+    );
+  }
+
+  return (
+    <ButtonPrimaryLink href="/prisijungti" extraButtonCss="py-[5px] w-auto max-w-none">
+      <span>Prisijungti</span>
+    </ButtonPrimaryLink>
+  );
+}

@@ -8,6 +8,7 @@ import type { RegisterPayload } from "@/lib/api/auth/types";
 import { useForm, useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import z from "zod";
+import Link from "next/link";
 
 const passwordSchema = z
   .string()
@@ -78,13 +79,14 @@ export default function RegistrationForm() {
   const submissionAttempts = useStore(form.store, (state) => state.submissionAttempts);
 
   const serverErrorMessage = register.isError
-    ? register.error.message || "Registracija nepavyko. Bandykite dar kartą."
+    ? register.error.message ||
+      "Registracija nepavyko. Bandykite dar kartą, arba susisiekite su pagalbos centru."
     : undefined;
 
   return (
     <div className="content center h-[calc(100vh-100px)]">
       <div className="center-col gap-4 p-8 rounded-[0.625rem] bg-foreground/10 w-full max-w-[400px]">
-        <h1>Registracija</h1>
+        <h1 className="h3">Registracija</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -238,6 +240,12 @@ export default function RegistrationForm() {
           <ButtonPrimary type="submit" isLoading={register.isPending} disabled={register.isPending}>
             Registruotis
           </ButtonPrimary>
+          <p className="text-[0.75rem] text-center">
+            Jau turite paskyrą?{" "}
+            <Link href="/prisijungti" className="text-primary">
+              Prisijunkite
+            </Link>
+          </p>
         </form>
       </div>
     </div>

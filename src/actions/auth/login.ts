@@ -1,14 +1,14 @@
 "use server";
 
 import { authFetch } from "@/helpers/authFetch";
-import { parseRegisterFailure } from "@/lib/api/errors";
-import type { PlayerAuthResponse, RegisterPayload, RegisterResult } from "@/lib/api/auth/types";
+import { parseLoginFailure } from "@/lib/api/errors";
+import type { LoginPayload, LoginResult, PlayerAuthResponse } from "@/lib/api/auth/types";
 
-export async function registerUser(payload: RegisterPayload): Promise<RegisterResult> {
+export async function loginUser(payload: LoginPayload): Promise<LoginResult> {
   let res: Response;
   try {
     res = await authFetch(
-      "/register",
+      "/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,7 +23,7 @@ export async function registerUser(payload: RegisterPayload): Promise<RegisterRe
   const body = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    return parseRegisterFailure(res.status, body);
+    return parseLoginFailure(res.status, body);
   }
 
   return { ok: true, data: body as PlayerAuthResponse };
