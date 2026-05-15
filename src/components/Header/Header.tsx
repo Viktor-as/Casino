@@ -22,12 +22,10 @@ function Header() {
         <Link href="/" className="absolute left-10 top-2">
           <Image src={logo} alt="GG Casino Logo" width={120} />
         </Link>
-        <div className="w-[120px]"></div>
+        <div className="w-[140px] flex-shrink-0"></div>
         <HeaderNavLinks navLinks={NAV_ITEMS} />
-
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <HeaderBalance />
-
           <div
             className="flex items-center gap-2 rounded-[0.625rem] bg-foreground/10 px-2 py-1 font-medium dark:bg-white/10 border border-grey/40"
             aria-label="Kalba"
@@ -37,7 +35,6 @@ function Header() {
             <span className="text-text-grey">/</span>
             <span className="text-text-grey cursor-pointer">EN</span>
           </div>
-
           <ThemeSwitcher />
           <HeaderAuthActions />
         </div>

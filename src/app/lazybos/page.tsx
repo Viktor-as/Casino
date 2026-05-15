@@ -1,9 +1,37 @@
-export default function BetsPage() {
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+
+import EuroleagueBetsSection from "@/app/_components/EuroleagueBetsSection";
+import EurovisionBetsSection from "@/app/_components/EurovisionBetsSection";
+import {
+  fetchEuroleagueEventsOnServer,
+  fetchEurovisionEventsOnServer,
+} from "@/lib/api/events/fetchOnServer";
+import { getQueryClient } from "@/lib/query/getQueryClient";
+import { queryKeys } from "@/lib/query/queryKeys";
+
+import LazybosHero from "./_components/LazybosHero";
+
+export default async function BetsPage() {
+  const queryClient = getQueryClient();
+
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: queryKeys.events.euroleague,
+      queryFn: fetchEuroleagueEventsOnServer,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: queryKeys.events.eurovision,
+      queryFn: fetchEurovisionEventsOnServer,
+    }),
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Statymai</h1>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main>
+        <LazybosHero />
+        <EuroleagueBetsSection />
+        <EurovisionBetsSection />
       </main>
-    </div>
+    </HydrationBoundary>
   );
 }

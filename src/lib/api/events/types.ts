@@ -24,5 +24,6 @@ export type EurovisionPrediction = {
 
 export type EurovisionEventsResponse = {
   category: string;
+  description?: string;
   predictions: EurovisionPrediction[];
 };

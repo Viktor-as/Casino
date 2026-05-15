@@ -25,12 +25,17 @@ const amountNumericSchema = z
   .min(1, "Įveskite sumą")
   .refine((s) => Number.isFinite(parseAmount(s)), "Įveskite tinkamą skaičių");
 
-type EuroleagueStakeFormProps = {
+type BettingFormProps = {
   selectedTeam: "team1" | "team2" | null;
   stakeFieldId: string;
+  requireTeamSelection?: boolean;
 };
 
-export default function BettingForm({ selectedTeam, stakeFieldId }: EuroleagueStakeFormProps) {
+export default function BettingForm({
+  selectedTeam,
+  stakeFieldId,
+  requireTeamSelection = true,
+}: BettingFormProps) {
   const [success, setSuccess] = useState<PlaceBetSuccessResponse | null>(null);
   const [fieldsKey, setFieldsKey] = useState(0);
 
@@ -72,6 +77,7 @@ export default function BettingForm({ selectedTeam, stakeFieldId }: EuroleagueSt
       key={fieldsKey}
       selectedTeam={selectedTeam}
       stakeFieldId={stakeFieldId}
+      requireTeamSelection={requireTeamSelection}
       onBetSuccess={setSuccess}
     />
   );
@@ -80,10 +86,16 @@ export default function BettingForm({ selectedTeam, stakeFieldId }: EuroleagueSt
 type StakeFieldsProps = {
   selectedTeam: "team1" | "team2" | null;
   stakeFieldId: string;
+  requireTeamSelection: boolean;
   onBetSuccess: (data: PlaceBetSuccessResponse) => void;
 };
 
-function StakeFields({ selectedTeam, stakeFieldId, onBetSuccess }: StakeFieldsProps) {
+function StakeFields({
+  selectedTeam,
+  stakeFieldId,
+  requireTeamSelection,
+  onBetSuccess,
+}: StakeFieldsProps) {
   const { user, isAuthenticated } = useSession();
   const bet = useBet();
   const balance = user?.balance;
@@ -132,7 +144,7 @@ function StakeFields({ selectedTeam, stakeFieldId, onBetSuccess }: StakeFieldsPr
   const { Field } = form;
   const submissionAttempts = useStore(form.store, (state) => state.submissionAttempts);
 
-  const canSubmit = selectedTeam !== null;
+  const canSubmit = requireTeamSelection ? selectedTeam !== null : true;
   const inputId = `stake-amount-${stakeFieldId}`;
 
   return (

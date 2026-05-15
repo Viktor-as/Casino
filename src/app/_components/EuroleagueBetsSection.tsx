@@ -18,7 +18,7 @@ function MatchCardSkeleton() {
   );
 }
 
-function BetsSection() {
+function EuroleagueBetsSection() {
   const euroleague = useQuery({
     queryKey: queryKeys.events.euroleague,
     queryFn: fetchEuroleagueEvents,
@@ -36,7 +36,7 @@ function BetsSection() {
         </div>
 
         {euroleague.isPending ? (
-          <div className="grid grid-cols-4 gap-6 max-tab:grid-cols-2 max-mob:grid-cols-1">
+          <div className="grid grid-cols-1 gap-6 tab:grid-cols-4 mob:grid-cols-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <MatchCardSkeleton key={index} />
             ))}
@@ -44,7 +44,7 @@ function BetsSection() {
         ) : euroleague.isError ? (
           <p className="text-text-grey">Nepavyko įkelti Eurolygos rungtynių. Bandykite vėliau.</p>
         ) : (
-          <div className="grid grid-cols-4 gap-6 max-tab:grid-cols-2 max-mob:grid-cols-1">
+          <div className="grid grid-cols-1 gap-6 tab:grid-cols-4 mob:grid-cols-2">
             {euroleague.data.matches.map((match, index) => (
               <div key={`${match.team1}-${match.team2}-${index}`}>
                 <EuroleagueMatchCard match={match} stakeFieldId={`${index}`} />
@@ -57,4 +57,4 @@ function BetsSection() {
   );
 }
 
-export default BetsSection;
+export default EuroleagueBetsSection;

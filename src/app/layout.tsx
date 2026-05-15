@@ -8,6 +8,7 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 import { getSession } from "@/actions/auth/session";
 import { getQueryClient } from "@/lib/query/getQueryClient";
 import { queryKeys } from "@/lib/query/queryKeys";
+import Footer from "@/components/Footer/Footer";
 
 const secondaryFont = Inter({
   weight: ["400", "500", "600", "700"],
@@ -49,7 +50,8 @@ export default async function RootLayout({
           <HydrationBoundary state={dehydrate(queryClient)}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Header />
-              {children}
+              <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+              <Footer />
             </ThemeProvider>
           </HydrationBoundary>
         </QueryProvider>
