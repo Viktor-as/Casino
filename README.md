@@ -13,7 +13,6 @@ Built with Next.js. The UI talks to a **separate HTTP API**; configure its base 
 
    ```bash
    git clone
-   cd mock-api
    ```
 
 2. Install dependencies (From the repository root):
