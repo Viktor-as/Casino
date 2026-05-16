@@ -28,9 +28,13 @@ function EuroleagueBetsSection() {
   const description = euroleague.data?.description ?? "";
 
   return (
-    <section className="bg-background py-16 max-mob:py-10">
-      <div className="content flex flex-col gap-10">
-        <div className="flex flex-col gap-2">
+    <section className="relative overflow-hidden bg-linear-to-b from-background via-foreground/[0.03] to-background py-16 max-mob:py-10">
+      <div className="absolute -left-24 top-24 h-48 w-48 rounded-full bg-secondary/10 blur-3xl" />
+      <div className="content relative flex flex-col gap-10">
+        <div className="flex flex-col gap-3">
+          <span className="w-fit rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
+            Karšta dabar
+          </span>
           <h2 className="h2 text-foreground">{title}</h2>
           {description ? <p className="text-base leading-6 text-text-grey">{description}</p> : null}
         </div>
@@ -46,7 +50,11 @@ function EuroleagueBetsSection() {
         ) : (
           <div className="grid grid-cols-1 gap-6 tab:grid-cols-4 mob:grid-cols-2">
             {euroleague.data.matches.map((match, index) => (
-              <div key={`${match.team1}-${match.team2}-${index}`}>
+              <div
+                key={`${match.team1}-${match.team2}-${index}`}
+                className="animate-homepage-card-in"
+                style={{ animationDelay: `${index * 90}ms` }}
+              >
                 <EuroleagueMatchCard match={match} stakeFieldId={`${index}`} />
               </div>
             ))}
