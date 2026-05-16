@@ -20,7 +20,7 @@ justify-center transition-colors duration-300 ease-in-out
 const stateClasses = (disabled?: boolean) =>
   disabled ? "opacity-40 cursor-not-allowed" : "opacity-100 cursor-pointer";
 
-const textClasses = "text-[14px] font-semibold text-button-text-primary";
+const textClasses = "text-sm font-semibold text-button-text-primary";
 
 export const ButtonPrimary = ({
   children,

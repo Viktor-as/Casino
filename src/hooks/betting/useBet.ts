@@ -20,10 +20,14 @@ export function useBet() {
       }
       return result.data;
     },
-    onSuccess: (data: PlaceBetSuccessResponse) => {
+    onSuccess: async (data: PlaceBetSuccessResponse) => {
       queryClient.setQueryData<PlayerAuthResponse | null>(queryKeys.auth.session, (prev) =>
         prev ? { ...prev, balance: data.balance } : prev,
       );
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: queryKeys.betting.myBets.root }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.wallet.myTransactions.root }),
+      ]);
     },
   });
 }

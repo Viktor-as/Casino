@@ -21,9 +21,9 @@ export function PasswordInput({ className, ...props }: PasswordInputProps) {
         aria-pressed={visible}
       >
         {visible ? (
-          <EyeOffIcon className="text-text-secondary" width={20} height={20} />
+          <EyeOffIcon className="text-text-secondary" width={20} height={20} aria-hidden />
         ) : (
-          <EyeIcon className="text-text-secondary" width={20} height={20} />
+          <EyeIcon className="text-text-secondary" width={20} height={20} aria-hidden />
         )}
       </button>
     </div>

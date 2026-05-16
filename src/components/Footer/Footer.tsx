@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/assets/logo/ggcasino-logo.png";
-import { NAV_ITEMS } from "@/constants/nav";
+import FooterNavLinks from "./FooterNavLinks";
 
 const INFO_LINKS = [
   { href: "#", label: "Taisyklės" },
@@ -33,18 +33,7 @@ function Footer() {
             <p className="text-xs font-semibold uppercase tracking-wide text-text-grey">
               Navigacija
             </p>
-            <ul className="flex flex-col gap-2">
-              {NAV_ITEMS.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-sm font-medium text-text-grey transition-colors hover:text-primary"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <FooterNavLinks />
           </nav>
 
           <nav aria-label="Informacija" className="flex flex-col gap-3">

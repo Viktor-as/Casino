@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import { QueryClient, environmentManager } from "@tanstack/react-query";
 
 function makeQueryClient() {
@@ -11,9 +13,11 @@ function makeQueryClient() {
 
 let browserQueryClient: QueryClient | undefined;
 
+const getServerQueryClient = cache(makeQueryClient);
+
 export function getQueryClient() {
   if (environmentManager.isServer()) {
-    return makeQueryClient();
+    return getServerQueryClient();
   }
 
   if (!browserQueryClient) {

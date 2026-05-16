@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import HeroSection from "@/app/_components/HeroSection";
@@ -10,6 +11,26 @@ import { getQueryClient } from "@/lib/query/getQueryClient";
 import { queryKeys } from "@/lib/query/queryKeys";
 import EurovisionBetsSection from "./_components/EurovisionBetsSection";
 import { ButtonPrimaryLink } from "@/components/Buttons/ButtonPrimary";
+import { getSiteOrigin } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: { absolute: "GG Casino" },
+  description:
+    "Žaisk drąsiai, laimėk garsiai. GG Casino – naujos kartos platforma su greitais išmokėjimais, geriausiais koeficientais ir skaidria sistema.",
+  openGraph: {
+    title: "GG Casino",
+    description:
+      "Žaisk drąsiai, laimėk garsiai. GG Casino – naujos kartos platforma su greitais išmokėjimais, geriausiais koeficientais ir skaidria sistema.",
+    url: getSiteOrigin(),
+  },
+  twitter: {
+    title: "GG Casino",
+    description:
+      "Žaisk drąsiai, laimėk garsiai. GG Casino – naujos kartos platforma su greitais išmokėjimais, geriausiais koeficientais ir skaidria sistema.",
+  },
+};
+
+export const dynamic = "force-static";
 
 export default async function Home() {
   const queryClient = getQueryClient();

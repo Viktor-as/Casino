@@ -15,7 +15,7 @@ function EurovisionEntryCard({ prediction, stakeFieldId }: EurovisionEntryCardPr
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-semibold leading-6 text-foreground">{prediction.country}</h3>
         <p className="text-sm leading-5 text-foreground">{prediction.artists}</p>
-        <p className="line-clamp-2 text-xs leading-[18px] text-text-grey">{prediction.song}</p>
+        <p className="line-clamp-2 text-xs leading-[1.125rem] text-text-grey">{prediction.song}</p>
         <p className="pt-1 text-lg font-bold leading-7 text-primary">
           {prediction.betMultiplier.toFixed(2)}
         </p>

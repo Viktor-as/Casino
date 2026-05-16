@@ -1,4 +1,5 @@
 import type { LoginResult, PlaceBetResult, RegisterResult } from "@/lib/api/auth/types";
+import type { CancelMyBetResult } from "@/lib/api/betting/types";
 
 export class RegisterError extends Error {
   constructor(message: string) {
@@ -55,6 +56,30 @@ export function parseBetFailure(_status: number, body: unknown): Extract<PlaceBe
   }
 
   const message = betErrorMessageLt[raw] ?? raw;
+
+  return { ok: false, message };
+}
+
+const cancelMyBetMessageLt: Record<string, string> = {
+  "Bet already canceled": "Statymas jau atšauktas",
+  "Bet not found": "Statymas nerastas",
+  "Bet already completed": "Statymas jau užbaigtas",
+};
+
+export function parseCancelMyBetFailure(
+  _status: number,
+  body: unknown,
+): Extract<CancelMyBetResult, { ok: false }> {
+  const raw =
+    typeof body === "object" && body && "message" in body
+      ? String((body as { message: unknown }).message)
+      : "";
+
+  if (!raw) {
+    return { ok: false, message: "Statymo atšaukti nepavyko" };
+  }
+
+  const message = cancelMyBetMessageLt[raw] ?? raw;
 
   return { ok: false, message };
 }

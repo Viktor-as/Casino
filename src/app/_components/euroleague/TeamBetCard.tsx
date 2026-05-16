@@ -19,6 +19,7 @@ function TeamBetCard({ teamName, multiplier, logo, selected, onSelect }: TeamBet
     <button
       type="button"
       aria-pressed={selected}
+      aria-label={`Pasirinkti ${teamName}, koeficientas ${multiplier.toFixed(2)}`}
       onClick={onSelect}
       className={cn(
         "flex min-w-0 w-full flex-col items-start gap-1 rounded-xl border-2 border-border-primary p-[13px] text-left transition-colors",
@@ -31,7 +32,7 @@ function TeamBetCard({ teamName, multiplier, logo, selected, onSelect }: TeamBet
         {logo ? (
           <Image src={logo} alt={teamName} fill className="object-contain p-0.5" sizes="32px" />
         ) : (
-          <span className="flex h-full w-full items-center justify-center text-[10px] font-bold text-text-grey">
+          <span className="flex h-full w-full items-center justify-center text-[0.625rem] font-bold text-text-grey">
             {getTeamInitials(teamName)}
           </span>
         )}

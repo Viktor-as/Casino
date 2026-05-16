@@ -25,7 +25,7 @@ function EuroleagueMatchCard({ match, stakeFieldId }: EuroleagueMatchCardProps) 
   return (
     <article className="flex flex-col gap-4 rounded-2xl border border-secondary/10 bg-foreground/5 p-6 backdrop-blur-sm">
       <div className="border-b border-border-primary/20 pb-4 text-center">
-        <p className="text-[10px] font-normal uppercase tracking-widest text-text-grey">
+        <p className="text-[0.625rem] font-normal uppercase tracking-widest text-text-grey">
           {match.eventDate}
         </p>
       </div>

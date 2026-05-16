@@ -29,7 +29,7 @@ function ThemeSwitcher({ onThemeChange }: ThemeSwitcherProps) {
   }
 
   return (
-    <label className="switch" aria-label="Toggle dark mode">
+    <label className="switch" aria-label="Perjungti šviesią ar tamsią temą">
       <input
         type="checkbox"
         checked={resolvedTheme === "light"}

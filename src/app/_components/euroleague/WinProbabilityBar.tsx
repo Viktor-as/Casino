@@ -14,7 +14,7 @@ function WinProbabilityBar({ team1WinRate, team2WinRate }: WinProbabilityBarProp
         <div className="h-full bg-secondary" style={{ width: `${team1Percent}%` }} />
         <div className="h-full bg-primary" style={{ width: `${team2Percent}%` }} />
       </div>
-      <div className="flex justify-between text-[10px] leading-[15px] text-text-grey">
+      <div className="flex justify-between text-[0.625rem] leading-[0.9375rem] text-text-grey">
         <span>{team1WinRate.toFixed(1)}%</span>
         <span>{team2WinRate.toFixed(1)}%</span>
       </div>
