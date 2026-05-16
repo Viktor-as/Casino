@@ -12,6 +12,7 @@ import { queryKeys } from "@/lib/query/queryKeys";
 import EurovisionBetsSection from "./_components/EurovisionBetsSection";
 import { ButtonPrimaryLink } from "@/components/Buttons/ButtonPrimary";
 import { getSiteOrigin } from "@/lib/site";
+import HomeInteractiveShowcase from "./_components/HomeInteractiveShowcase";
 
 export const metadata: Metadata = {
   title: { absolute: "GG Casino" },
@@ -50,11 +51,17 @@ export default async function Home() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
         <HeroSection />
+        <HomeInteractiveShowcase />
         <EuroleagueBetsSection />
         <EurovisionBetsSection limit={8} />
-        <div className="content mb-32 mt-8 center">
+        <div className="content center mb-32 mt-8">
           <div className="max-w-[300px] w-full">
-            <ButtonPrimaryLink href="/lazybos">Daugiau lažybų</ButtonPrimaryLink>
+            <ButtonPrimaryLink
+              href="/lazybos"
+              extraButtonCss="hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/25 transition-all"
+            >
+              Daugiau lažybų
+            </ButtonPrimaryLink>
           </div>
         </div>
       </main>

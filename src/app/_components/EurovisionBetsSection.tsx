@@ -58,7 +58,11 @@ function EurovisionBetsSection({ limit }: EurovisionBetsSectionProps) {
     body = (
       <div className="grid grid-cols-1 gap-6 tab:grid-cols-4 mob:grid-cols-2">
         {predictions.map((prediction, index) => (
-          <div key={`${prediction.country}-${prediction.song}-${index}`}>
+          <div
+            key={`${prediction.country}-${prediction.song}-${index}`}
+            className="animate-homepage-card-in"
+            style={{ animationDelay: `${index * 70}ms` }}
+          >
             <EurovisionEntryCard prediction={prediction} stakeFieldId={`eurovision-${index}`} />
           </div>
         ))}
@@ -67,9 +71,13 @@ function EurovisionBetsSection({ limit }: EurovisionBetsSectionProps) {
   }
 
   return (
-    <section className="bg-background py-16 max-mob:py-10">
-      <div className="content flex flex-col gap-10">
-        <div className="flex flex-col gap-2">
+    <section className="relative overflow-hidden bg-background py-16 max-mob:py-10">
+      <div className="absolute -right-24 top-10 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+      <div className="content relative flex flex-col gap-10">
+        <div className="flex flex-col gap-3">
+          <span className="w-fit rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-text-tertiary">
+            Fanų favoritas
+          </span>
           <h2 className="h2 text-foreground">{title}</h2>
           {description ? <p className="text-base leading-6 text-text-grey">{description}</p> : null}
         </div>

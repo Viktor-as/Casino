@@ -72,3 +72,148 @@ body {
 .animate-pulse-dot {
   animation: pulse-dot 1.5s infinite ease-in-out;
 }
+
+@keyframes hero-zoom {
+  0% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes homepage-glow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3%, -2%, 0) scale(1.08);
+  }
+}
+
+@keyframes homepage-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(1deg);
+  }
+}
+
+@keyframes homepage-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homepage-card-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes homepage-shimmer {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes homepage-border-orbit {
+  0% {
+    transform: translateX(-60%);
+  }
+
+  100% {
+    transform: translateX(160%);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 18s ease-in-out infinite alternate;
+}
+
+.animate-homepage-glow {
+  animation: homepage-glow 10s ease-in-out infinite;
+}
+
+.animate-homepage-float {
+  animation: homepage-float 5s ease-in-out infinite;
+}
+
+.animate-homepage-float-delayed {
+  animation: homepage-float 6s ease-in-out infinite;
+  animation-delay: 1.1s;
+}
+
+.animate-homepage-float-slow {
+  animation: homepage-float 8s ease-in-out infinite;
+}
+
+.animate-homepage-slide-up {
+  animation: homepage-slide-up 700ms ease-out both;
+}
+
+.animate-homepage-card-in {
+  animation: homepage-card-in 650ms ease-out both;
+}
+
+.animate-homepage-shimmer {
+  animation: homepage-shimmer 5s linear infinite;
+}
+
+.homepage-stat-card {
+  @apply flex flex-col gap-1 rounded-2xl border border-primary/15 bg-background/60 p-4 shadow-lg shadow-primary/5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:bg-foreground/10;
+  animation: homepage-card-in 650ms ease-out both;
+}
+
+.homepage-glow-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 80px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.homepage-glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 55%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+  animation: homepage-border-orbit 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-zoom,
+  .animate-homepage-glow,
+  .animate-homepage-float,
+  .animate-homepage-float-delayed,
+  .animate-homepage-float-slow,
+  .animate-homepage-slide-up,
+  .animate-homepage-card-in,
+  .animate-homepage-shimmer,
+  .homepage-stat-card,
+  .homepage-glow-card::before {
+    animation: none;
+  }
+}
